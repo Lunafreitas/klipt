@@ -25,7 +25,7 @@
                 {{-- Imagem ou placeholder --}}
                 @if($foto->imagem)
                     <a href="{{ route('fotos.show', $foto) }}">
-                        <img src="{{ Storage::url($foto->imagem) }}"
+                        <img src="{{ asset('storage/' . $foto->imagem) }}"
                              alt="{{ $foto->titulo }}"
                              class="card__img"
                              style="aspect-ratio:unset;height:auto;">
