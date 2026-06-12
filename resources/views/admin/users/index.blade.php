@@ -2,7 +2,7 @@
     Listagem de usuários — admin only.
     Admin visualiza todos os usuários, podendo ver seus conteúdos e excluí-los.
 --}}
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('title', 'Usuários')
 @section('content')
 

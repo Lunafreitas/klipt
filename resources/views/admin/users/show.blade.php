@@ -2,7 +2,7 @@
     Detalhe de usuário — admin visualiza todos os álbuns e fotos do usuário selecionado.
     Admin pode ver conteúdo privado (é a distinção de permissão para admin).
 --}}
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('title', 'Usuário: ' . $user->name)
 @section('content')
 

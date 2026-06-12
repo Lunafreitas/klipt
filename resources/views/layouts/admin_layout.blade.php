@@ -34,18 +34,6 @@
                     Galeria
                 </a>
 
-                {{-- Links autenticados --}}
-                @auth
-                    <span class="nav__sep"></span>
-                    <a href="{{ route('albums.index') }}"
-                       class="{{ request()->routeIs('albums.*') ? 'active' : '' }}">
-                        Álbuns
-                    </a>
-                    <a href="{{ route('fotos.index') }}"
-                       class="{{ request()->routeIs('fotos.*') ? 'active' : '' }} hide-mobile">
-                        Fotos
-                    </a>
-
                     {{-- Links exclusivos do administrador --}}
                     @if(auth()->user()->is_admin)
                         <span class="nav__sep"></span>
@@ -59,16 +47,11 @@
                         </a>
                         <span class="badge-admin">Admin</span>
                     @endif
-                @endauth
             </ul>
 
             {{-- Área direita: perfil / login --}}
             @auth
                 <div class="flex items-center gap-sm" style="margin-left:auto; flex-shrink:0;">
-                    <a href="{{ route('profile.edit') }}"
-                       style="font-size:11px;font-weight:500;letter-spacing:0.08em;color:#AAA;text-decoration:none;text-transform:uppercase;">
-                        {{ Str::limit(auth()->user()->name, 14) }}
-                    </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="btn btn--ghost btn--sm"
