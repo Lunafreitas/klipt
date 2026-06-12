@@ -2,7 +2,9 @@
     Detalhe de álbum para o dono autenticado.
     Exibe todas as fotos do álbum (públicas e privadas).
 --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', $album->nome)
 

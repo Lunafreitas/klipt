@@ -1,5 +1,7 @@
 {{-- Formulário de edição de álbum — controller verifica propriedade antes de renderizar --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 @section('title', 'Editar: ' . $album->nome)
 @section('content')
 
@@ -55,4 +57,3 @@
     </div>
 
 @endsection
-

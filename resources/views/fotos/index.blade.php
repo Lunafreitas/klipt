@@ -2,7 +2,9 @@
     Lista de fotos do usuário autenticado.
     Usuário comum vê apenas suas próprias fotos (filtrado no controller via Auth::id()).
 --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', 'Minhas Fotos')
 

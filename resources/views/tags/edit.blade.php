@@ -1,5 +1,7 @@
 {{-- Formulário de edição de tag — admin only --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 @section('title', 'Editar Tag: ' . $tag->nome)
 @section('content')
 

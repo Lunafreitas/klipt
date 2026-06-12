@@ -2,7 +2,9 @@
     Detalhe de foto para o dono autenticado.
     O controller já valida que foto.user_id === Auth::id() antes de chegar aqui.
 --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', $foto->titulo)
 

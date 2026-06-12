@@ -1,7 +1,9 @@
 {{--
     Perfil público de um fotógrafo — exibe álbuns e fotos públicos do usuário.
 --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', $user->name)
 

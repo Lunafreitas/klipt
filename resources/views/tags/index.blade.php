@@ -2,7 +2,9 @@
     Lista de tags — acessível apenas ao admin (protegido pelo AdminMiddleware nas rotas).
     Tags são globais; qualquer usuário pode aplicá-las às fotos, mas apenas o admin gerencia.
 --}}
-@extends('layouts.admin_layout')
+
+@extends('layouts.app')
+@include('layouts.navigation')
 @section('title', 'Gerenciar Tags')
 @section('content')
 

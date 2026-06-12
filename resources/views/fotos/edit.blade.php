@@ -4,6 +4,7 @@
     Se nenhuma nova imagem for enviada, mantém a imagem atual.
 --}}
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', 'Editar: ' . $foto->titulo)
 

@@ -2,7 +2,9 @@
     Edição de perfil do usuário autenticado — nome, e-mail e senha.
     Usa o ProfileController padrão do Breeze/Laravel.
 --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 @section('title', 'Meu Perfil')
 @section('content')
 

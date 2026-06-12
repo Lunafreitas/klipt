@@ -1,5 +1,7 @@
 {{-- Formulário de criação de tag — admin only --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 @section('title', 'Nova Tag')
 @section('content')
 

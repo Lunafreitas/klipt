@@ -2,8 +2,9 @@
     Lista de álbuns do usuário autenticado.
     Controller filtra por user_id = Auth::id().
 --}}
-@extends('layouts.app')
 
+@extends('layouts.app')
+@include('layouts.navigation')
 @section('title', 'Meus Álbuns')
 
 @section('content')
@@ -74,4 +75,3 @@
     @endif
 
 @endsection
-

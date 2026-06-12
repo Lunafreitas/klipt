@@ -4,6 +4,7 @@
     O álbum selecionado deve pertencer ao usuário autenticado (validado no FormRequest).
 --}}
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', 'Nova Foto')
 

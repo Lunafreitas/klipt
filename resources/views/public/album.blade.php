@@ -3,6 +3,7 @@
     Usa abort_if no controller para bloquear álbuns privados.
 --}}
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', $album->nome)
 

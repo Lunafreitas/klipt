@@ -3,12 +3,9 @@
     Exibe fotos públicas em layout masonry inspirado no Pinterest.
     Visitantes vêem tudo mas não podem gerenciar conteúdo.
 --}}
-@auth
-    @extends('layouts.app')
-    @if(auth()->user()->is_admin)
-        @extends('layouts.admin_layout')
-    @endif
-@endauth
+
+@extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', 'Galeria')
 

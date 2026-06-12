@@ -1,7 +1,9 @@
 {{--
     Página pública de uma tag — lista todas as fotos públicas vinculadas a ela.
 --}}
+
 @extends('layouts.app')
+@include('layouts.navigation')
 
 @section('title', 'Tag: ' . $tag->nome)
 
