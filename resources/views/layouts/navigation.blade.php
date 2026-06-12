@@ -15,6 +15,20 @@
 
                 {{-- Links autenticados --}}
                 @auth
+                {{-- Links exclusivos do administrador --}}
+                @if(auth()->user()->is_admin)
+                    <span class="nav__sep"></span>
+                    <a href="{{ route('tags.index') }}"
+                       class="{{ request()->routeIs('tags.*') ? 'active' : '' }} hide-mobile">
+                        Tags
+                    </a>
+                    <a href="{{ route('usuarios.index') }}"
+                       class="{{ request()->routeIs('usuarios.*') ? 'active' : '' }} hide-mobile">
+                        Usuários
+                    </a>
+                    <span class="badge-admin">Admin</span>
+                    @else
+                    {{-- Links dos usuarios --}}
                     <span class="nav__sep"></span>
                     <a href="{{ route('albums.index') }}"
                        class="{{ request()->routeIs('albums.*') ? 'active' : '' }}">
@@ -25,18 +39,6 @@
                         Fotos
                     </a>
 
-                    {{-- Links exclusivos do administrador --}}
-                    @if(auth()->user()->is_admin)
-                        <span class="nav__sep"></span>
-                        <a href="{{ route('tags.index') }}"
-                           class="{{ request()->routeIs('tags.*') ? 'active' : '' }} hide-mobile">
-                            Tags
-                        </a>
-                        <a href="{{ route('usuarios.index') }}"
-                           class="{{ request()->routeIs('usuarios.*') ? 'active' : '' }} hide-mobile">
-                            Usuários
-                        </a>
-                        <span class="badge-admin">Admin</span>
                     @endif
                 @endauth
             </ul>
