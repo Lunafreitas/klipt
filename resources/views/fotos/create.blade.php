@@ -29,7 +29,7 @@
             </a>
         </div>
     @endif
-
+<div style="display: flex">
     <div class="form-card">
         <form method="POST" action="{{ route('fotos.store') }}" enctype="multipart/form-data">
             @csrf
@@ -70,7 +70,8 @@
             <div class="form-group">
                 <label class="form-label" for="imagem">Imagem * (máx. 4 MB)</label>
                 <input id="imagem" type="file" name="imagem"
-                       class="form-control" accept="image/*" required>
+                    class="form-control" accept="image/*" 
+                    onchange="previewImagem(event)" required>
                 @error('imagem') <p class="form-error">{{ $message }}</p> @enderror
             </div>
 
@@ -117,7 +118,26 @@
                     Cancelar
                 </a>
             </div>
-        </form>
+        </form>        
     </div>
 
+    <div style="margin-top: 15px;">
+        <img id="img-preview" src="#" alt="Pré-visualização da foto" class="img-preview">
+    </div>
+</div>
+<script>
+    function previewImagem(event) {
+        var input = event.target;
+        var reader = new FileReader();
+
+        reader.onload = function(){
+            var dataURL = reader.result;
+            var output = document.getElementById('img-preview');
+            output.src = dataURL;
+            output.style.display = 'block'; // Torna a imagem visível
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
 @endsection

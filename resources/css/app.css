@@ -421,3 +421,11 @@
             .main { padding: var(--gap-md); }
             .page-header { flex-direction: column; align-items: flex-start; }
         }
+
+        .img-preview {
+            border: 2px solid var(--c-accent);
+            margin: 2rem;
+            display: none;
+            max-width: 650px;
+            max-height: 700px ;
+        }
