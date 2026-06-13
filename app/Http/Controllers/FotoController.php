@@ -10,19 +10,33 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-/**
- * Controlador de Fotos.
- *
- * Usuário comum: gerencia apenas suas próprias fotos.
- * A autorização de propriedade é verificada via abort_unless em cada ação.
- * Upload e exclusão de arquivos usam o disco 'public' (storage/app/public).
- */
 class FotoController extends Controller
 {
-    /**
-     * Lista as fotos do usuário autenticado com seus relacionamentos.
-     * Apenas fotos do próprio usuário são retornadas (filtro por user_id).
-     */
+public function download($filename)
+{
+    $caminhoNoStorage = urldecode($filename); // Decodifica o nome do arquivo
+    
+    // Verifica se o arquivo existe dentro do disco público
+    if (Storage::disk('public')->exists($caminhoNoStorage)) {
+        
+        // Limpa a memória para o arquivo não vir quebrado
+        if (ob_get_level()) { 
+            ob_end_clean(); 
+        }
+
+        // Pega o caminho físico completo no computador/servidor
+        $caminhoAbsoluto = Storage::disk('public')->path($caminhoNoStorage);
+        
+        // Faz o download usando a resposta padrão do Laravel
+        return response()->download($caminhoAbsoluto);
+    }
+
+    // Se o arquivo não existir de verdade, mostra o erro na tela
+    abort(404, "Arquivo não encontrado no storage público: " . $caminhoNoStorage);
+}
+
+
+    /** Lista as fotos do usuário autenticado com seus relacionamentos. Apenas fotos do próprio usuário são retornadas (filtro por user_id). */
     public function index()
     {
         $fotos = Foto::with(['album', 'tags'])

@@ -51,7 +51,7 @@
 
             <div style="display:flex;gap:var(--gap-sm);margin-top:var(--gap-lg);">
                 <button type="submit" class="btn btn--primary">Salvar</button>
-                <a href="{{ route('albums.show', $album) }}" class="btn btn--ghost">Cancelar</a>
+                <a href="{{ route('albums.index') }}" class="btn btn--ghost">Cancelar</a>
             </div>
         </form>
     </div>

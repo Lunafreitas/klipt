@@ -43,7 +43,7 @@
         </div>
     @else
         <div class="empty-state">
-            <div class="empty-state__icon">◻</div>
+            <div class="empty-state__icon">X</div>
             <p class="empty-state__title">Sem fotos nesta tag</p>
             <p class="empty-state__text">Nenhuma foto pública foi marcada com "{{ $tag->nome }}".</p>
         </div>

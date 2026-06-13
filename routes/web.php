@@ -60,3 +60,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/download-imagem/{filename}', [FotoController::class, 'download'])
+    ->name('foto.download')
+    ->where('filename', '.*'); // ISSO PERMITE BARRAS NA URL

@@ -28,7 +28,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('fotos.index'));
+        // Remove o intended e força ir para a home pública
+        return redirect()->route('public.index');
     }
 
     /**

@@ -3,11 +3,10 @@
     Requer autenticação — o controller usa Auth::id() para definir user_id.
     O álbum selecionado deve pertencer ao usuário autenticado (validado no FormRequest).
 --}}
+
 @extends('layouts.app')
 @include('layouts.navigation')
-
 @section('title', 'Nova Foto')
-
 @section('content')
 
     <div class="page-header">
@@ -120,24 +119,38 @@
             </div>
         </form>        
     </div>
-
-    <div style="margin-top: 15px;">
-        <img id="img-preview" src="#" alt="Pré-visualização da foto" class="img-preview">
+    
+    <img id="img-preview" src="#" alt="Pré-visualização da foto" class="img-preview">
+    
+    <div class="img-div empty-state">
+        <div class="empty-state__icon">X</div>
+        <p class="empty-state__title">Nenhuma Foto</p>
+        <p class="empty-state__text">Selecione sua foto para enviar.</p>
     </div>
 </div>
+    
 <script>
     function previewImagem(event) {
-        var input = event.target;
-        var reader = new FileReader();
-
-        reader.onload = function(){
-            var dataURL = reader.result;
-            var output = document.getElementById('img-preview');
-            output.src = dataURL;
-            output.style.display = 'block'; // Torna a imagem visível
-        };
-
+    var input = event.target;
+    var reader = new FileReader();
+    
+    reader.onload = function(){
+        var dataURL = reader.result;
+        var output = document.getElementById('img-preview');
+        output.src = dataURL;
+        output.style.display = 'block'; // Torna a imagem visível
+        
+        // Seleciona a div com as duas classes e oculta
+        var emptyState = document.querySelector('.img-div.empty-state');
+        if (emptyState) {
+            emptyState.style.display = 'none';
+        }
+    };
+    
+    // Evita erro caso o usuário cancele a seleção do arquivo
+    if (input.files && input.files[0]) {
         reader.readAsDataURL(input.files[0]);
     }
+}
 </script>
 @endsection

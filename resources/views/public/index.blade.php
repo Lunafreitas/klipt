@@ -16,15 +16,11 @@
             <p class="page-header__eyebrow">[ Galeria Pública ]</p>
             <h1 class="page-header__title">Klipt</h1>
         </div>
-        @auth
-            <a href="{{ route('fotos.create') }}" class="btn btn--primary">
-                + Nova Foto
-            </a>
-        @else
+        @if (Auth::guest())
             <a href="{{ route('register') }}" class="btn btn--ghost">
                 Criar Conta
             </a>
-        @endauth
+        @endif
     </div>
 
     {{-- Grid masonry de fotos públicas --}}
@@ -59,6 +55,16 @@
                                 &nbsp;·&nbsp; {{ $foto->album->nome }}
                             @endif
                         </p>
+
+                       @if(!empty($foto->imagem))
+                            <a href="{{ route('foto.download', ['filename' => $foto->imagem]) }}" download class="btn btn-dowload">
+                                Baixar Imagem
+                            </a>
+                        @else
+                            <button class="btn btn-secondary" disabled title="Nenhum arquivo disponível">
+                                Sem Imagem
+                            </button>
+                        @endif
 
                         {{-- Tags da foto --}}
                         @if($foto->tags->count())
