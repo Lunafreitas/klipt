@@ -53,6 +53,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scrollbar-width: none;
 }
 
 body {
@@ -650,4 +651,78 @@ body {
     margin: 0 2rem;
     height: 681px;
     width: 600px;
+}
+
+.f-view {
+    margin-left: auto;
+}
+
+.img-show {
+    border: 2px solid var(--c-border-lt);
+    object-fit: cover;
+    display: block;
+    height: 470px;
+    width: auto;
+}
+
+.info-img {
+    display:flex;
+    gap: 2rem;
+    align-items:start;
+}
+
+.info-img aside {
+    width: 290px;
+    min-width: 290px;
+}
+
+.desc {
+    font-size:14px;
+    color:var(--c-ink-muted);
+    margin-top:var(--gap-md);
+    line-height:1.6;
+    width: 290px;
+}
+
+.f-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-md);
+}
+
+.f-card {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+}
+
+.f-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 2px solid var(--c-border);
+}
+
+.f-card .card__body {
+    background: var(--c-success);
+    padding: var(--gap-md);
+}
+
+.f-title{
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: -8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--c-surface);
+}
+
+.form-delete {
+    margin-top:var(--gap-xl);
+    max-width:480px;
+    border:2px solid var(--c-danger);
+    padding:var(--gap-lg);
 }

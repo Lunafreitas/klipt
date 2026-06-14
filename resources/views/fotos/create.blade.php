@@ -74,24 +74,6 @@
                 @error('imagem') <p class="form-error">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Visibilidade --}}
-            <div class="form-group">
-                <label class="form-label">Visibilidade *</label>
-                <div style="display:flex;gap:var(--gap-md);">
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
-                        <input type="radio" name="publico" value="1"
-                               {{ old('publico', '1') == '1' ? 'checked' : '' }}>
-                        Pública
-                    </label>
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
-                        <input type="radio" name="publico" value="0"
-                               {{ old('publico') == '0' ? 'checked' : '' }}>
-                        Privada
-                    </label>
-                </div>
-                @error('publico') <p class="form-error">{{ $message }}</p> @enderror
-            </div>
-
             {{-- Tags (multi-select) --}}
             @if($tags->count())
                 <div class="form-group">
@@ -148,7 +130,7 @@
     };
     
     // Evita erro caso o usuário cancele a seleção do arquivo
-    if (input.files && input.files[0]) {
+   if (input.files && input.files[0]) {
         reader.readAsDataURL(input.files[0]);
     }
 }

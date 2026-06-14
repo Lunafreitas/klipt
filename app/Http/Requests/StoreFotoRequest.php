@@ -22,7 +22,7 @@ class StoreFotoRequest extends FormRequest
             'titulo' => ['required', 'string', 'max:255'],
             'descricao' => ['nullable', 'string'],
             'imagem' => ['required', 'image', 'max:4096'],
-            'publico' => ['required', 'boolean'],
+            // 'publico' => ['required', 'boolean'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['exists:tags,id'],
         ];

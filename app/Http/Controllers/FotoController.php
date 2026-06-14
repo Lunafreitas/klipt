@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Storage;
 
 class FotoController extends Controller
 {
+
 public function download($filename)
 {
     $caminhoNoStorage = urldecode($filename); // Decodifica o nome do arquivo
-    
+
     // Verifica se o arquivo existe dentro do disco público
     if (Storage::disk('public')->exists($caminhoNoStorage)) {
-        
+
         // Limpa a memória para o arquivo não vir quebrado
         if (ob_get_level()) { 
             ob_end_clean(); 
@@ -36,8 +37,7 @@ public function download($filename)
 }
 
 
-    /** Lista as fotos do usuário autenticado com seus relacionamentos. Apenas fotos do próprio usuário são retornadas (filtro por user_id). */
-    public function index()
+    public function index() // Listagem de fotos
     {
         $fotos = Foto::with(['album', 'tags'])
             ->where('user_id', Auth::id()) // Restringe ao dono das fotos
@@ -47,32 +47,24 @@ public function download($filename)
         return view('fotos.index', compact('fotos'));
     }
 
-    /**
-     * Exibe formulário de upload de foto.
-     * Passa apenas os álbuns do usuário autenticado (não pode vincular a álbum alheio).
-     */
-    public function create()
+
+    public function create() // Criar fotos
     {
         $albums = Album::where('user_id', Auth::id())->orderBy('nome')->get();
-        $tags   = Tag::orderBy('nome')->get(); // Tags são globais, gerenciadas pelo admin
+        $tags = Tag::orderBy('nome')->get(); // Tags são globais, gerenciadas pelo admin
 
         return view('fotos.create', compact('albums', 'tags'));
     }
 
-    /**
-     * Persiste a foto no banco e no disco.
-     * O user_id é definido no controller, nunca via input do formulário.
-     * As tags são sincronizadas via tabela pivot foto_tag.
-     */
-    public function store(StoreFotoRequest $request)
+
+    public function store(StoreFotoRequest $request) // Persiste uma nova foto
     {
         $validated = $request->validated();
-
-        // Define o dono como o usuário autenticado
         $validated['user_id'] = Auth::id();
+        $validated['imagem'] = $request->file('imagem')->store('fotos', 'public'); // Armazena a imagem no disco público sob /storage/fotos/
 
-        // Armazena a imagem no disco público sob /storage/fotos/
-        $validated['imagem'] = $request->file('imagem')->store('fotos', 'public');
+        // BUSCA O ÁLBUM: Pega o álbum selecionado do banco de dados
+        $album = \App\Models\Album::findOrFail($validated['album_id']);
 
         $foto = Foto::create([
             'user_id'   => $validated['user_id'],
@@ -80,7 +72,7 @@ public function download($filename)
             'titulo'    => $validated['titulo'],
             'descricao' => $validated['descricao'] ?? null,
             'imagem'    => $validated['imagem'],
-            'publico'   => $validated['publico'],
+            'publico'   => $album->publico,
         ]);
 
         // Vincula tags selecionadas via tabela pivot (sem tags = sem attach)
@@ -92,18 +84,18 @@ public function download($filename)
             ->with('success', 'Foto enviada com sucesso.');
     }
 
-    /**
-     * Exibe o detalhe de uma foto para o seu dono.
-     * Retorna 403 se o usuário não for o dono da foto.
-     */
+
     public function show(Foto $foto)
     {
         // Apenas o dono pode acessar o detalhe autenticado
         abort_unless($foto->user_id === Auth::id(), 403);
-
         $foto->load('album', 'tags');
+        $fotos = Foto::where('user_id', Auth::id())
+                 ->where('id', '!=', $foto->id) // Não repete a foto atual na lista abaixo
+                 ->latest()
+                 ->get();
 
-        return view('fotos.show', compact('foto'));
+        return view('fotos.show', compact('foto', 'fotos'));
     }
 
     /**

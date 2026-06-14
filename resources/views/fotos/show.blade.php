@@ -15,13 +15,13 @@
         &nbsp;/&nbsp; {{ $foto->titulo }}
     </p>
 
-    <div style="display:grid;grid-template-columns:1fr 300px;gap:var(--gap-lg);align-items:start;">
+    <div class="info-img">
 
         <div>
             @if($foto->imagem)
                 <img src="{{ Storage::url($foto->imagem) }}"
                      alt="{{ $foto->titulo }}"
-                     style="width:100%;border:2px solid var(--c-border);display:block;">
+                     class="img-show">
             @endif
         </div>
 
@@ -37,7 +37,7 @@
             </span>
 
             @if($foto->descricao)
-                <p style="font-size:14px;color:var(--c-ink-muted);margin-top:var(--gap-md);line-height:1.6;">
+                <p class="desc">
                     {{ $foto->descricao }}
                 </p>
             @endif
@@ -74,12 +74,40 @@
                 </form>
             </div>
         </aside>
+
+        <div class="f-view" style="max-width:600px;">
+        @if($fotos->count())
+            <div class="f-grid">
+                @foreach($fotos as $foto)
+                    <div class="f-card">
+                        
+                        {{-- Imagem ou placeholder --}}
+                        @if($foto->imagem)
+                            <a href="{{ route('fotos.show', $foto) }}">
+                                <img src="{{ asset('storage/' . $foto->imagem) }}" alt="{{ $foto->titulo }}" class="f-img" style="aspect-ratio:unset;height:auto;">
+                            </a>
+                        @endif
+    
+                        <div class="card__body">
+                            <div class="flex items-center justify-between mb-md" style="gap:8px;">
+                                <p class="f-title">
+                                    <a href="{{ route('fotos.show', $foto) }}">
+                                        {{ $foto->titulo }}
+                                    </a>
+                                </p>
+                            </div>
+    
+                            {{-- Álbum vinculado --}}
+                            @if($foto->album)
+                                <p class="card__meta">{{ $foto->album->nome }}</p>
+                            @endif
+                        </div>
+    
+                    </div>
+                @endforeach
+            </div>
+        @endif
+        </div>
+        
     </div>
-
-    <style>
-        @media (max-width: 768px) {
-            div[style*="grid-template-columns:1fr 300px"] { grid-template-columns: 1fr !important; }
-        }
-    </style>
-
 @endsection

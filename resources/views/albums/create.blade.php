@@ -1,7 +1,7 @@
 {{-- Formulário de criação de álbum --}}
-<x-app-layout>
 
-@extends('layouts.navigation')
+@extends('layouts.app')
+@include('layouts.navigation')
 @section('title', 'Novo Álbum')
 @section('content')
 
@@ -57,4 +57,3 @@
     </div>
 
 @endsection
-</x-app-layout>

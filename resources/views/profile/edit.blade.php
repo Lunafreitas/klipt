@@ -89,36 +89,57 @@
             </form>
         </div>
     </div>
-
-    {{-- Seção: excluir conta --}}
-    <div style="margin-top:var(--gap-xl);max-width:480px;border:2px solid var(--c-danger);padding:var(--gap-lg);">
-        <h2 style="font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-danger);margin-bottom:var(--gap-md);">
-            Zona de Perigo
-        </h2>
-        <p style="font-size:13px;color:var(--c-ink-muted);margin-bottom:var(--gap-md);">
-            A exclusão da conta é permanente. Todos os seus álbuns e fotos serão removidos.
-        </p>
-        <form method="POST" action="{{ route('profile.destroy') }}">
-            @csrf @method('DELETE')
-            <div class="form-group">
-                <label class="form-label" for="delete_password">Confirme sua senha para continuar</label>
-                <input id="delete_password" type="password" name="password"
-                       class="form-control">
-                @error('password', 'userDeletion')
-                    <p class="form-error">{{ $message }}</p>
-                @enderror
-            </div>
-            <button type="submit" class="btn btn--danger"
-                    onclick="return confirm('Tem certeza? Esta ação não pode ser desfeita.')">
-                Excluir Minha Conta
-            </button>
-        </form>
-    </div>
-
-    <style>
-        @media (max-width: 768px) {
-            div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-        }
-    </style>
+    
+    @if(auth()->user()->is_admin) 
+        {{-- Seção: excluir conta --}}
+        <div class="form-delete" style="display: none">
+            <h2 style="font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-danger);margin-bottom:var(--gap-md);">
+                Zona de Perigo
+            </h2>
+            <p style="font-size:13px;color:var(--c-ink-muted);margin-bottom:var(--gap-md);">
+                A exclusão da conta é permanente. Todos os seus álbuns e fotos serão removidos.
+            </p>
+            <form method="POST" action="{{ route('profile.destroy') }}">
+                @csrf @method('DELETE')
+                <div class="form-group">
+                    <label class="form-label" for="delete_password">Confirme sua senha para continuar</label>
+                    <input id="delete_password" type="password" name="password"
+                        class="form-control">
+                    @error('password', 'userDeletion')
+                        <p class="form-error">{{ $message }}</p>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn--danger"
+                        onclick="return confirm('Tem certeza? Esta ação não pode ser desfeita.')">
+                    Excluir Minha Conta
+                </button>
+            </form>
+        </div>
+     @else 
+            <div class="form-delete">
+            <h2 style="font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-danger);margin-bottom:var(--gap-md);">
+                Zona de Perigo
+            </h2>
+            <p style="font-size:13px;color:var(--c-ink-muted);margin-bottom:var(--gap-md);">
+                A exclusão da conta é permanente. Todos os seus álbuns e fotos serão removidos.
+            </p>
+            <form method="POST" action="{{ route('profile.destroy') }}">
+                @csrf @method('DELETE')
+                <div class="form-group">
+                    <label class="form-label" for="delete_password">Confirme sua senha para continuar</label>
+                    <input id="delete_password" type="password" name="password"
+                        class="form-control">
+                    @error('password', 'userDeletion')
+                        <p class="form-error">{{ $message }}</p>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn--danger"
+                        onclick="return confirm('Tem certeza? Esta ação não pode ser desfeita.')">
+                    Excluir Minha Conta
+                </button>
+            </form>
+        </div>
+    
+    @endif
 
 @endsection
