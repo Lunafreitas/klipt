@@ -1,8 +1,3 @@
-{{--
-    Lista de fotos do usuário autenticado.
-    Usuário comum vê apenas suas próprias fotos (filtrado no controller via Auth::id()).
---}}
-
 @extends('layouts.app')
 @include('layouts.navigation')
 
@@ -24,7 +19,7 @@
         <div class="grid-masonry">
             @foreach($fotos as $foto)
             <div class="card">
-                {{-- Imagem ou placeholder --}}
+
                 @if($foto->imagem)
                     <a href="{{ route('fotos.show', $foto) }}">
                         <img src="{{ asset('storage/' . $foto->imagem) }}"

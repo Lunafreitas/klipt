@@ -1,8 +1,4 @@
-{{--
-    Formulário de criação de foto.
-    Requer autenticação — o controller usa Auth::id() para definir user_id.
-    O álbum selecionado deve pertencer ao usuário autenticado (validado no FormRequest).
---}}
+{{-- Formulário de criação de foto.--}}
 
 @extends('layouts.app')
 @include('layouts.navigation')

@@ -77,7 +77,7 @@
                     <div class="card">
                         @if($foto->imagem)
                             <img src="{{ Storage::url($foto->imagem) }}" alt="{{ $foto->titulo }}"
-                                 class="card__img" style="aspect-ratio:unset;height:auto;">
+                                 class="card__img">
                         @endif
                         <div class="card__body">
                             <div class="flex items-center justify-between">

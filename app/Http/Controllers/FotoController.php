@@ -87,21 +87,12 @@ public function download($filename)
 
     public function show(Foto $foto)
     {
-        // Apenas o dono pode acessar o detalhe autenticado
-        abort_unless($foto->user_id === Auth::id(), 403);
         $foto->load('album', 'tags');
-        $fotos = Foto::where('user_id', Auth::id())
-                 ->where('id', '!=', $foto->id) // Não repete a foto atual na lista abaixo
-                 ->latest()
-                 ->get();
+        $fotos = Foto::where('user_id', $foto->user_id)->where('id', '!=', $foto->id)->inRandomOrder()->take(3)->get();
 
         return view('fotos.show', compact('foto', 'fotos'));
     }
 
-    /**
-     * Exibe o formulário de edição da foto.
-     * Só o dono pode editar.
-     */
     public function edit(Foto $foto)
     {
         abort_unless($foto->user_id === Auth::id(), 403);
@@ -114,11 +105,6 @@ public function download($filename)
         return view('fotos.edit', compact('foto', 'albums', 'tags'));
     }
 
-    /**
-     * Atualiza os dados da foto.
-     * Se uma nova imagem for enviada, a anterior é removida do disco.
-     * Tags são sincronizadas (sync substitui completamente as tags anteriores).
-     */
     public function update(UpdateFotoRequest $request, Foto $foto)
     {
         abort_unless($foto->user_id === Auth::id(), 403);

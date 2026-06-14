@@ -1,8 +1,3 @@
-{{--
-    Detalhe de álbum para o dono autenticado.
-    Exibe todas as fotos do álbum (públicas e privadas).
---}}
-
 @extends('layouts.app')
 @include('layouts.navigation')
 
@@ -44,7 +39,7 @@
                 @if($foto->imagem)
                     <a href="{{ route('fotos.show', $foto) }}">
                         <img src="{{ Storage::url($foto->imagem) }}" alt="{{ $foto->titulo }}"
-                             class="card__img" style="aspect-ratio:unset;height:auto;">
+                             class="card__img">
                     </a>
                 @endif
                 <div class="card__body">
@@ -75,7 +70,7 @@
         </div>
     @else
         <div class="empty-state">
-            <div class="empty-state__icon">◻</div>
+            <div class="empty-state__icon">X</div>
             <p class="empty-state__title">Álbum vazio</p>
             <p class="empty-state__text">Adicione fotos a este álbum.</p>
             <a href="{{ route('fotos.create') }}" class="btn btn--primary">Enviar Foto</a>

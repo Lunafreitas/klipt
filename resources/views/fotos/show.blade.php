@@ -1,7 +1,4 @@
-{{--
-    Detalhe de foto para o dono autenticado.
-    O controller já valida que foto.user_id === Auth::id() antes de chegar aqui.
---}}
+{{-- minhas Fotos dos usuarios auenticados --}}
 
 @extends('layouts.app')
 @include('layouts.navigation')
@@ -10,6 +7,10 @@
 
 @section('content')
 
+@php
+    abort_unless($foto->user_id === Auth::id(), 403);
+@endphp
+    
     <p class="text-mono text-sm text-muted mb-md">
         <a href="{{ route('fotos.index') }}" style="color:inherit;text-decoration:none;">Minhas Fotos</a>
         &nbsp;/&nbsp; {{ $foto->titulo }}
@@ -78,7 +79,7 @@
         <div class="f-view" style="max-width:600px;">
         @if($fotos->count())
             <div class="f-grid">
-                @foreach($fotos as $foto)
+                @foreach($fotos->take(3) as $foto)
                     <div class="f-card">
                         
                         {{-- Imagem ou placeholder --}}
@@ -105,6 +106,7 @@
     
                     </div>
                 @endforeach
+                <a href="{{ route('fotos.index') }}" class="btn btn--primary" style="width:100%;">Ver mais fotos</a>
             </div>
         @endif
         </div>

@@ -1,7 +1,3 @@
-{{--
-    Página pública de uma tag — lista todas as fotos públicas vinculadas a ela.
---}}
-
 @extends('layouts.app')
 @include('layouts.navigation')
 
@@ -27,7 +23,7 @@
                     @if($foto->imagem)
                         <a href="{{ route('public.foto', $foto) }}">
                             <img src="{{ Storage::url($foto->imagem) }}" alt="{{ $foto->titulo }}"
-                                 class="card__img" style="aspect-ratio:unset;height:auto;">
+                                 class="card__img">
                         </a>
                     @endif
                     <div class="card__body">
@@ -37,6 +33,17 @@
                             </a>
                         </p>
                         <p class="card__meta">{{ $foto->user->name }}</p>
+
+                        @if(!empty($foto->imagem))
+                            <a href="{{ route('foto.download', ['filename' => $foto->imagem]) }}" download class="btn btn-dowload">
+                                Baixar Imagem
+                            </a>
+                        @else
+                            <button class="btn btn-secondary" disabled title="Nenhum arquivo disponível">
+                                Sem Imagem
+                            </button>
+                        @endif
+
                     </div>
                 </div>
             @endforeach

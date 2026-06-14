@@ -1,6 +1,3 @@
-{{--
-    Confirmação de senha antes de ações sensíveis (ex: excluir conta).
---}}
 @extends('layouts.guest')
 @section('title', 'Confirmar Senha')
 @section('content')

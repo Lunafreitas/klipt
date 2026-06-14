@@ -1,7 +1,3 @@
-{{--
-    Formulário de solicitação de redefinição de senha.
-    Envia link de reset para o e-mail informado.
---}}
 @extends('layouts.guest')
 @section('title', 'Esqueci a Senha')
 @section('content')

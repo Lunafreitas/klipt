@@ -1,7 +1,3 @@
-{{--
-    Formulário de redefinição de senha com token.
-    Acessado via link enviado por e-mail.
---}}
 @extends('layouts.guest')
 @section('title', 'Nova Senha')
 @section('content')

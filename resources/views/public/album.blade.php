@@ -1,7 +1,3 @@
-{{--
-    Álbum público — exibido para qualquer visitante quando album.publico = 1.
-    Usa abort_if no controller para bloquear álbuns privados.
---}}
 @extends('layouts.app')
 @include('layouts.navigation')
 
@@ -61,7 +57,7 @@
         </div>
     @else
         <div class="empty-state">
-            <div class="empty-state__icon">◻</div>
+            <div class="empty-state__icon">X</div>
             <p class="empty-state__title">Álbum vazio</p>
             <p class="empty-state__text">Nenhuma foto pública neste álbum.</p>
         </div>

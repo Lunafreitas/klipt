@@ -302,6 +302,8 @@ body {
     display: block;
     filter: grayscale(15%);
     transition: filter 0.2s, transform 0.2s;
+    aspect-ratio: unset; 
+    height: auto;
 }
 
 .card:hover .card__img {

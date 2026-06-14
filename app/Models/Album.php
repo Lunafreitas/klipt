@@ -20,6 +20,6 @@ class Album extends Model
 
     public function fotos()
     {
-        return $this->hasMany(Foto::class);
+        return $this->hasMany(Foto::class); //muitos para muitos
     }
 }

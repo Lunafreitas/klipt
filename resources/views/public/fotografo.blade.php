@@ -43,6 +43,7 @@
     @php
         $fotosPublicas = $user->fotos->where('publico', true);
     @endphp
+    
     @if($fotosPublicas->count())
         <section>
             <h2 style="font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--gap-md);padding-bottom:8px;border-bottom:1px solid var(--c-border-lt);">
@@ -54,7 +55,7 @@
                         @if($foto->imagem)
                             <a href="{{ route('public.foto', $foto) }}">
                                 <img src="{{ Storage::url($foto->imagem) }}" alt="{{ $foto->titulo }}"
-                                     class="card__img" style="aspect-ratio:unset;height:auto;">
+                                     class="card__img">
                             </a>
                         @endif
                         <div class="card__body">
@@ -72,7 +73,7 @@
 
     @if($albumsPublicos->isEmpty() && $fotosPublicas->isEmpty())
         <div class="empty-state">
-            <div class="empty-state__icon">◻</div>
+            <div class="empty-state__icon">X</div>
             <p class="empty-state__title">Nenhum conteúdo público</p>
             <p class="empty-state__text">Este fotógrafo ainda não publicou conteúdo.</p>
         </div>

@@ -1,8 +1,3 @@
-{{--
-    Listagem de usuários — admin only.
-    Admin visualiza todos os usuários, podendo ver seus conteúdos e excluí-los.
---}}
-
 @extends('layouts.app')
 @include('layouts.navigation')
 @section('title', 'Usuários')
@@ -13,7 +8,7 @@
             <p class="page-header__eyebrow">[ Admin ]</p>
             <h1 class="page-header__title">Usuários</h1>
         </div>
-        {{-- Admin visualiza usuários, não cria (registro é público) --}}
+        
         <p class="text-mono text-sm text-muted">{{ $users->total() }} registros</p>
     </div>
 
@@ -56,8 +51,8 @@
                             <a href="{{ route('usuarios.show', $user) }}" class="btn btn--ghost btn--sm">
                                 Ver
                             </a>
-                            {{-- Impede que o admin exclua a si mesmo --}}
-                            @if($user->id !== auth()->id())
+                            
+                            @if($user->id !== auth()->id())        {{-- Impede que o admin exclua a si mesmo --}}
                                 <form method="POST" action="{{ route('usuarios.destroy', $user) }}">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn--danger btn--sm"

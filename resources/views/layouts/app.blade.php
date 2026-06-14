@@ -1,8 +1,6 @@
 {{--
     Layout principal autenticado — usado por todas as páginas internas.
     Inclui navbar responsiva com acesso diferenciado para admin e usuário comum.
-    Identidade visual: monocromático preto/branco, tipografia grotesca pesada,
-    espaçamento generoso e estética grunge/industrial inspirada no Lareth Project.
 --}}
 <!DOCTYPE html>
 <html lang="pt-BR">

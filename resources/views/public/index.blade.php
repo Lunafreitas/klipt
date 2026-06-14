@@ -1,8 +1,4 @@
-{{--
-    Galeria pública — página inicial acessível a todos (visitantes, usuários e admin).
-    Exibe fotos públicas em layout masonry inspirado no Pinterest.
-    Visitantes vêem tudo mas não podem gerenciar conteúdo.
---}}
+{{-- Galeria pública --}}
 
 @extends('layouts.app')
 @include('layouts.navigation')
@@ -23,11 +19,11 @@
         @endif
     </div>
 
-    {{-- Grid masonry de fotos públicas --}}
+    {{-- grid de fotos públicas --}}
     @if($fotos->count())
         <div class="grid-masonry">
             @foreach($fotos as $foto)
-                {{-- Exibe apenas fotos marcadas como públicas --}}
+
                 @if($foto->publico)
                 <div class="card">
                     {{-- Imagem da foto com link para detalhes --}}
@@ -35,8 +31,7 @@
                         <a href="{{ route('public.foto', $foto) }}">
                             <img src="{{ Storage::url($foto->imagem) }}"
                                  alt="{{ $foto->titulo }}"
-                                 class="card__img"
-                                 style="aspect-ratio: unset; height: auto;">
+                                 class="card__img">
                         </a>
                     @endif
 

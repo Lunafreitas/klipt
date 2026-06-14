@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 class PublicGalleryController extends Controller
 {
-    /**
-     * Galeria principal — lista fotos públicas em ordem decrescente.
-     * Carrega relacionamentos para evitar N+1 queries.
-     */
+    
+    // -- Galeria principal — lista fotos públicas em ordem decrescente.
+    // -- Carrega relacionamentos para evitar N+1 queries.
+
     public function index()
     {
         $fotos = Foto::with(['user', 'album', 'tags'])
@@ -30,10 +30,18 @@ class PublicGalleryController extends Controller
      */
     public function foto(Foto $foto)
     {
-        // Garante que apenas fotos públicas sejam acessíveis por visitantes
-        abort_unless($foto->publico, 403, 'Esta foto é privada.');
+        abort_if(!$foto->publico, 403);
 
-        $foto->load('user', 'album', 'tags');
+        $foto->load('album', 'tags');
+
+        $fotos = Foto::where('user_id', $foto->user_id)
+            ->where('id', '!=', $foto->id)
+            ->where('publico', true)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
+
+        return view('public.foto', compact('foto', 'fotos'));
     }
 
     /**
@@ -53,14 +61,13 @@ class PublicGalleryController extends Controller
         return view('public.album', compact('album'));
     }
 
-    /**
-     * Perfil público de um fotógrafo.
-     * Exibe apenas álbuns e fotos públicos do usuário.
-     */
+    
+    // -- Perfil público de um fotógrafo.
+    // -- Exibe apenas álbuns e fotos públicos do usuário.
+     
     public function fotografo(User $user)
     {
-        // Carrega álbuns públicos com contagem de fotos públicas
-        $user->load([
+        $user->load([   // Carrega álbuns públicos com contagem de fotos públicas
             'albums' => function ($query) {
                 $query->where('publico', true);
             },

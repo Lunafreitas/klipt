@@ -1,8 +1,3 @@
-{{--
-    Formulário de edição de foto.
-    O controller verifica foto.user_id === Auth::id() antes de renderizar.
-    Se nenhuma nova imagem for enviada, mantém a imagem atual.
---}}
 @extends('layouts.app')
 @include('layouts.navigation')
 

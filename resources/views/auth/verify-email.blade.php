@@ -1,6 +1,3 @@
-{{--
-    Aviso de verificação de e-mail — exibido quando MustVerifyEmail está ativo.
---}}
 @extends('layouts.guest')
 @section('title', 'Verificar E-mail')
 @section('content')

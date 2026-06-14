@@ -63,7 +63,7 @@
 
     @else
         <div class="empty-state">
-            <div class="empty-state__icon">◻</div>
+            <div class="empty-state__icon">X</div>
             <p class="empty-state__title">Nenhuma tag</p>
             <p class="empty-state__text">Crie tags para categorizar as fotos da plataforma.</p>
             <a href="{{ route('tags.create') }}" class="btn btn--primary">Nova Tag</a>
